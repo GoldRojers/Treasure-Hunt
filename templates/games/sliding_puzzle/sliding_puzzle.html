@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sliding Puzzle</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='sliding_puzzle.css') }}" />
+  </head>
+  <body>
+
+    <div class="container">
+      <h1>🧩 Sliding Puzzle</h1>
+      <p>Arrange the tiles in order from 1 to 15. The empty space helps you slide.</p>
+        <p id="countdown">⏱️ Time Left: 05:00</p>
+      <div id="puzzle-board" class="board"></div>
+      <button onclick="resetPuzzle()">🔁 Shuffle</button>
+      <p id="message"></p>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/sliding_puzzle.js') }}"></script>
+  </body>
+</html>

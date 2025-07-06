@@ -1,0 +1,17 @@
+{% extends "admin/base_admin.html" %}
+{% block content %}
+<h2>⚙️ Controls</h2>
+<form method="POST">
+    <label>Reset All Progress:</label>
+    <button type="submit" name="action" value="reset">🧹 Reset Game</button>
+</form>
+
+<form method="POST">
+    <label>Broadcast Message to All Teams:</label>
+    <input type="text" name="message" required>
+    <button type="submit" name="action" value="broadcast">📢 Send</button>
+</form>
+{% if msg %}
+<p style="color: green;">{{ msg }}</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block content %}
+  <head>
+    <title>Manage Players</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='players.css') }}" />
+  </head>
+
+  <h2>👥 Manage Players</h2>
+
+  {% for team, members in team_groups.items() %}
+    <input type="text" id="search-{{ loop.index }}" placeholder="🔍 Search by name or UID" style="margin-bottom: 10px; padding: 8px; width: 300px;" />
+    <h3>{{ team }}</h3>
+    <h3>{{ team }}</h3>
+    {% set prog = progress.get(team) %}
+    {% if prog and prog.time_spent %}
+      <p>
+        <strong>⏱️ Time:</strong> {{ prog.time_spent }} minutes
+      </p>
+    {% else %}
+      <p>
+        <em>No time recorded yet.</em>
+      </p>
+    {% endif %}
+    <form method="POST" style="margin-bottom: 10px;">
+      <input type="hidden" name="reset_timer_team" value="{{ team }}" />
+      <button type="submit">♻️ Reset Timer</button>
+    </form>
+
+    <table class="table" id="table-{{ loop.index }}">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>UID</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for p in members %}
+          <tr>
+            <td>
+              {{ p.name }}
+              {% if progress[team].leader == p.name %}
+                <span class="badge">👑 Leader</span>
+              {% endif %}
+            </td>
+            <td>{{ p.uid }}</td>
+            <td>
+              <form method="POST" action="/admin/players/edit" style="display:inline-block;">
+                <input type="hidden" name="uid" value="{{ p.uid }}" />
+                <button type="submit">✏️ Edit</button>
+              </form>
+              <form method="POST" action="/admin/players/remove">
+                <input type="hidden" name="uid" value="{{ p.uid }}" />
+                <button type="submit">🗑️ Remove</button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <script>
+      document.getElementById('search-{{ loop.index }}').addEventListener('keyup', function () {
+        const term = this.value.toLowerCase()
+        const rows = document.querySelectorAll('#table-{{ loop.index }} tbody tr')
+        rows.forEach((row) => {
+          const name = row.children[0].textContent.toLowerCase()
+          const uid = row.children[1].textContent.toLowerCase()
+          row.style.display = name.includes(term) || uid.includes(term) ? '' : 'none'
+        })
+      })
+    </script>
+  {% endfor %}
+{% endblock %}

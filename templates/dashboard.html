@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ team }} Dashboard - IICC Treasure Hunt</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f5f5f5;
+        padding: 30px;
+      }
+      .box {
+        background: white;
+        padding: 25px;
+        max-width: 600px;
+        margin: auto;
+        border-radius: 10px;
+        box-shadow: 0 0 10px #ccc;
+      }
+      h2,
+      h3 {
+        text-align: center;
+      }
+      input,
+      button {
+        padding: 10px;
+        width: 100%;
+        margin-top: 10px;
+      }
+      .error {
+        color: red;
+        text-align: center;
+        margin-top: 10px;
+      }
+      .clue {
+        background: #eee;
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 6px;
+        text-align: center;
+      }
+      .instructions {
+        font-size: 14px;
+        margin-top: 10px;
+        color: #444;
+        background: #fcfcfc;
+        padding: 8px;
+        border-left: 4px solid #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <h2>Welcome, {{ name }} ({{ team }})</h2>
+      <h3>🔐 Level {{ level }} Puzzle</h3>
+
+      {% if clue %}
+        <div class="clue">
+          <strong>Clue:</strong><br />
+          {{ clue }}
+        </div>
+      {% endif %}
+
+      {% if progress[team]["current_level"] in puzzle_bank %}
+        {% set instr = puzzle_bank[progress[team]["current_level"]].get("instructions") %}
+        {% if instr %}
+          <div class="instructions">
+            <strong>Instructions:</strong><br />
+            {{ instr }}
+          </div>
+        {% endif %}
+      {% endif %}
+
+      <form method="POST" action="/submit_clue">
+        <input type="text" name="answer" placeholder="Enter your answer" required />
+        <button type="submit">Submit</button>
+      </form>
+
+      <form action="{{ url_for('take_hint') }}" method="post" style="margin-top: 10px;">
+        <button type="submit" class="btn btn-warning">Take Hint (-{{ 5 + progress[team].get('hint_count', 0) * 5 }}pts)</button>
+      </form>
+
+      {% if error %}
+        <div class="error">{{ error }}</div>
+      {% endif %}
+
+      <p style="text-align:center; margin-top: 20px;">
+        <a href="/leaderboard">📊 View Leaderboard</a>
+      </p>
+    </div>
+    <div id="timer" style="text-align:center; margin-top:15px; font-size: 20px; font-weight: bold;">
+  Time: 00:00
+</div>
+
+
+    <script>
+    const startTime = {{ progress[team]["start_time"] | int }};
+    function updateTimer() {
+        const now = Math.floor(Date.now() / 1000); // current time in seconds
+        const elapsed = now - startTime;
+        const minutes = Math.floor(elapsed / 60);
+        const seconds = elapsed % 60;
+        document.getElementById("timer").innerText = `Time: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+    updateTimer();
+    setInterval(updateTimer, 1000);
+</script>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+{% extends "admin/base_admin.html" %}
+{% block content %}
+<h2>🏆 Leaderboard</h2>
+<table border="1" cellpadding="10">
+<tr><th>Rank</th><th>Team</th><th>Time (sec)</th><th>Members</th></tr>
+{% for i, entry in enumerate(scores) %}
+<tr>
+    <td>{{ i+1 }}</td>
+    <td>{{ entry[0] }}</td>
+    <td>{{ entry[1] }}</td>
+    <td>{{ ', '.join(entry[2]) }}</td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}

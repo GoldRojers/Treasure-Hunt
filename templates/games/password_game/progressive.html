@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Password Game</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='password_game.css') }}">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <style>
+  .rule-card { display: none; }
+</style>
+
+</head>
+<body>
+  <div class="container">
+    <h1>Password Game 🔐</h1>
+
+    <form onsubmit="return false;">
+      <label for="answer">Enter your password:</label>
+      <input type="text" name="answer" id="answer" value="{{ password }}" required>
+      <button type="submit">Check</button>
+    </form>
+
+    <h3>Rules Progress:</h3>
+<ul>
+  <li class="rule-card failed" data-rule="length">🔴 At least 8 characters</li>
+  <li class="rule-card failed" data-rule="upper">🔴 At least 1 uppercase letter</li>
+  <li class="rule-card failed" data-rule="month">🔴 Must include a month name (e.g., January)</li>
+  <li class="rule-card failed" data-rule="digit">🔴 At least 1 digit</li>
+  <li class="rule-card failed" data-rule="symbol">🔴 At least 1 symbol (!@#$%^&*)</li>
+  <li class="rule-card failed" data-rule="repeat">🔴 No 3 identical letters in a row</li>
+  <li class="rule-card failed" data-rule="sum25">🔴 Digits must sum to 25</li>
+  <li class="rule-card failed" data-rule="roman">🔴 Must include a Roman numeral (I,V,X,L,C,D,M)</li>
+  <li class="rule-card failed" data-rule="product35">🔴 Roman letters product must be 35</li>
+</ul>
+
+  </div>
+
+  <script src="{{ url_for('static', filename='js/password_game.js') }}"></script>
+</body>
+</html>

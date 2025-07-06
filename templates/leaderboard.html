@@ -1,0 +1,64 @@
+<style>
+    table {
+    width: 95%;
+    margin: 30px auto;
+    border-collapse: collapse;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    background-color: #ffffff;
+}
+
+th, td {
+    padding: 12px 18px;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+th {
+    background-color: #292b2c;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+tr:hover {
+    background-color: #e2e6ea;
+}
+
+td strong {
+    color: #2c7be5;
+    font-weight: bold;
+}
+
+</style>
+<table>
+    <tr>
+        <th>Rank</th>
+        <th>Team</th>
+        <th>Members</th>
+        <th>Points</th> <!-- NEW -->
+        <th>Base</th>
+        <th>Time Bonus</th>
+        <th>Hint Penalty</th>
+        <th>Time Score</th> <!-- RENAMED -->
+        <th>Time Taken (min)</th>
+    </tr>
+    {% for entry in scores %}
+    <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ entry.team }}</td>
+        <td>{{ ', '.join(entry.members) }}</td>
+        <td>{{ entry.points }}</td> <!-- NEW -->
+        <td>{{ entry.base }}</td>
+        <td>{{ entry.time_bonus }}</td>
+        <td>{{ entry.hint_penalty }}</td>
+        <td><strong>{{ entry.total }}</strong></td>
+        <td>{{ '%.1f' % (entry.duration) }}</td>
+    </tr>
+    {% endfor %}
+</table>

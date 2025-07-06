@@ -1,0 +1,31 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block content %}
+<h2>🎮 Special Games</h2>
+<p>Select a mini-game to play:</p>
+<link rel="stylesheet" href="{{ url_for('static', filename='special_games.css') }}">
+
+<div class="cards">
+    <a href="{{ url_for('play_game21') }}" class="card">
+        <img src="/static/icons/game21.jfif" class="card-image">
+        <div>Game of 21</div>
+    </a>
+    <a href="{{ url_for('play_password_game') }}" class="card">
+    <img src="/static/icons/password_game.jpg" class="card-image">
+    <div>Password Game</div>
+</a>
+
+    <a href="{{ url_for('play_wordle') }}" class="card">
+        <img src="/static/icons/wordle.jpg" class="card-image">
+        <div>Wordle</div>
+    </a>
+    <a href="{{ url_for('play_sliding_puzzle') }}" class="card">
+        <img src="/static/icons/sliding_puzzle.jpg" class="card-image">
+        <div>Sliding Puzzle</div>
+    </a>
+    <a href="{{ url_for('play_sudoku') }}" class="card">
+        <img src="/static/icons/sudoku.jpg" class="card-image">
+        <div>Sudoku</div>
+    </a>
+</div>
+{% endblock %}

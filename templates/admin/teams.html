@@ -1,0 +1,29 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block content %}
+<h2>Team Management</h2>
+<table border="1" cellpadding="10">
+    <tr>
+        <th>Team Name</th>
+        <th>Members</th>
+    </tr>
+    {% for team, members in teams.items() %}
+    <tr>
+        <td>{{ team }}</td>
+        <td>{{ members | join(', ') if members else 'No members yet' }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<form method="POST" style="margin-top: 20px;">
+    <label>Add Team:</label>
+    <input type="text" name="new_team" placeholder="Team Name" required>
+    <button type="submit" name="action" value="add">➕ Add</button>
+</form>
+
+<form method="POST">
+    <label>Remove Team:</label>
+    <input type="text" name="remove_team" placeholder="Team Name" required>
+    <button type="submit" name="action" value="remove">❌ Remove</button>
+</form>
+{% endblock %}

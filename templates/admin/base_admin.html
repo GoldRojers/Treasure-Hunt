@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel - IICC Treasure Hunt</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='base_admin.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Admin Panel - IICC Treasure Hunt</h1>
+    </header>
+    <nav>
+        <a href="{{ url_for('admin_dashboard') }}">Dashboard</a>
+        <a href="{{ url_for('admin_panel') }}">Create Puzzle</a>
+        <a href="{{ url_for('manage_games') }}">Special Games</a>
+        <a href="{{ url_for('manage_teams') }}">Teams</a>
+        <a href="{{ url_for('show_leaderboard') }}">Leaderboard</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+
+    </nav>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

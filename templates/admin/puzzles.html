@@ -1,0 +1,40 @@
+{% extends "admin/base_admin.html" %}
+{% block content %}
+<h2>🧩 Create Puzzle</h2>
+<form method="POST">
+    <label>Level Number:</label>
+    <input type="number" name="level" required><br><br>
+
+    <label>Clue / Question:</label>
+    <input type="text" name="text" required><br><br>
+
+    <label>Expected Answer:</label>
+    <input type="text" name="answer" required><br><br>
+
+    <label>Puzzle Type:</label>
+    <select name="type">
+        <option value="manual">Manual</option>
+        <option value="caesar">Caesar Cipher</option>
+        <option value="base64">Base64</option>
+        <option value="binary">Binary</option>
+        <option value="rot13">ROT13</option>
+        <option value="md5">MD5</option>
+        <option value="sudoku">Sudoku</option>
+        <option value="password_game">Password Game</option>
+        <option value="game21">Game of 21</option>
+        <option value="wordle">Wordle</option>
+        <option value="sliding_puzzle">Sliding Puzzle</option>
+    </select><br><br>
+
+    <label>Instructions (optional):</label>
+    <textarea name="instructions" placeholder="Rules or hints..."></textarea><br><br>
+
+    <button type="submit">💾 Save Puzzle</button>
+</form>
+{% if success %}
+<p style="color:green;">{{ success }}</p>
+{% endif %}
+{% if error %}
+<p style="color:red;">{{ error }}</p>
+{% endif %}
+{% endblock %}

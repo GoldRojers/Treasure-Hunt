@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard - AutoQuest</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <h2>AutoQuest 🧩</h2>
+            <nav>
+                <a href="{{ url_for('admin_dashboard') }}">Dashboard</a>
+                <a href="{{ url_for('admin_panel') }}">Create Puzzle</a>
+                <a href="{{ url_for('manage_teams') }}">Manage Teams</a>
+                <a href="{{ url_for('manage_players') }}">Manage Players</a>
+                <a href="{{ url_for('manage_games') }}">Special Games</a>
+                <a href="{{ url_for('show_leaderboard') }}">Leaderboard</a>
+                <a href="{{ url_for('logout') }}" class="logout">Logout</a>
+            </nav>
+        </aside>
+        <main class="content">
+            <header class="topbar">
+                <h1>Welcome, Admin 👋</h1>
+                <p>Manage puzzles, teams, players, and check the leaderboard.</p>
+            </header>
+
+    <section class="cards">
+    <a href="{{ url_for('admin_panel') }}" class="card">
+        <img src="{{ url_for('static', filename='icons/puzzle.jpg') }}" alt="Puzzle" />
+        Create Puzzle
+    </a>
+    <a href="{{ url_for('manage_teams') }}" class="card">
+        <img src="{{ url_for('static', filename='icons/team.jpg') }}" alt="Teams" />
+        Manage Teams
+    </a>
+    <a href="{{ url_for('manage_players') }}" class="card">
+        <img src="{{ url_for('static', filename='icons/player.jpg') }}" alt="Players" />
+        Manage Players
+    </a>
+    <a href="{{ url_for('manage_games') }}" class="card">
+        <img src="{{ url_for('static', filename='icons/gamepad.jpg') }}" alt="Games" />
+        Special Games
+    </a>
+    <a href="{{ url_for('show_leaderboard') }}" class="card">
+        <img src="{{ url_for('static', filename='icons/trophy.jpg') }}" alt="Leaderboard" />
+        Leaderboard
+    </a>
+    <a href="{{ url_for('admin_controls') }}" class="card">
+    <img src="{{ url_for('static', filename='icons/control.jpg') }}" alt="Controls" />
+    Game Controls
+</a>
+
+</section>
+
+        </main>
+    </div>
+</body>
+</html>

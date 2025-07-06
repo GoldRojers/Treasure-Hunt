@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel - AutoQuest</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f0f4f8; padding: 30px; }
+        .container { background: #fff; padding: 25px; max-width: 800px; margin: auto; border-radius: 10px; box-shadow: 0 0 10px #bbb; }
+        h2, h3 { text-align: center; margin-bottom: 20px; }
+        label { display: block; margin-top: 15px; font-weight: bold; }
+        input, select, textarea, button { width: 100%; padding: 10px; margin-top: 5px; }
+        nav a { margin-right: 15px; font-weight: bold; color: #333; text-decoration: none; }
+        .message { color: green; text-align: center; }
+        .error { color: red; text-align: center; }
+        .nav-bar { margin-bottom: 20px; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🛠 Admin Control Panel</h2>
+
+        <div class="nav-bar">
+            <nav>
+                <a href="{{ url_for('admin_panel') }}">Create Puzzle</a>
+                <a href="{{ url_for('manage_players') }}">Manage Players</a>
+                <a href="{{ url_for('manage_teams') }}">Manage Teams</a>
+                <a href="{{ url_for('manage_games') }}">Special Games</a>
+                <a href="{{ url_for('show_leaderboard') }}">Leaderboard</a>
+                <a href="{{ url_for('logout') }}">Logout</a>
+            </nav>
+        </div>
+
+        <form method="POST">
+            <label for="level">Level Number:</label>
+            <input type="number" name="level" required>
+
+            <label for="text">Clue / Question (hidden):</label>
+            <input type="text" name="text" required>
+
+            <label for="answer">Expected Answer:</label>
+            <input type="text" name="answer" required>
+
+            <label for="type">Puzzle Type:</label>
+            <select name="type">
+                <option value="manual">Manual (plain text)</option>
+                <option value="caesar">Caesar Cipher</option>
+                <option value="binary">Binary</option>
+                <option value="base64">Base64</option>
+                <option value="rot13">ROT13</option>
+                <option value="md5">MD5</option>
+                <option value="sudoku">Sudoku</option>
+                <option value="game21">Game of 21</option>
+                <option value="wordle">Wordle</option>
+                <option value="password_rules">Password Game</option>
+            </select>
+
+            <label for="instructions">Optional: Instructions</label>
+            <textarea name="instructions" placeholder="Optional instructions or rules"></textarea>
+
+            <button type="submit">💾 Save Puzzle</button>
+        </form>
+
+        {% if success %}
+        <div class="message">{{ success }}</div>
+        {% endif %}
+        {% if error %}
+        <div class="error">{{ error }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>
