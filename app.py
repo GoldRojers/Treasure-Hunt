@@ -5,7 +5,6 @@ import base64
 import time
 import re
 import os
-import psycopg2
 from dotenv import load_dotenv
 load_dotenv()
 from pymongo import MongoClient
